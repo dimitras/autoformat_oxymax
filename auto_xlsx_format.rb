@@ -125,54 +125,62 @@ data_array = []
 	worksheet.each do |row|
 		if !row.nil?
 			col_num = 0
+
+			if row[0].value == 1
+		    	in_data_section = true
+		    end
+
 			row && row.cells.each do |cell|
 				val = cell && cell.value
 
-				if row[0].value == 1
-			    	in_data_section = true
+				if row[0].value.nil?
+			    	in_data_section = false
 			    end
 
 			    if in_data_section == true
-			    	if row[0].value.nil?
-			    		in_data_section = false
-			    	end
+			    	# if row.nil? || row[0].value.nil? || row[0].value == ":EVENTS"
+			    	# 	in_data_section = false
+			    	# end
 			    	if col_num == 2
 				    	# worksheet[row_num][col_num].change_contents(val, ((val-inittime)*24).to_i)
+				    	# puts val
 				    	val = ((val-inittime)*24).to_i
-				    	vo2_ranges[val] << row[3].value
-				    	o2in_ranges[val] << row[4].value
-				    	o2out_ranges[val] << row[5].value
-				    	do2_ranges[val] << row[6].value
-				    	acco2_ranges[val] << row[7].value
-				    	vco2_ranges[val] << row[8].value
-				    	co2in_ranges[val] << row[9].value
-				    	co2out_ranges[val] << row[10].value
-				    	dco2_ranges[val] << row[11].value
-				    	accco2_ranges[val] << row[12].value
-				    	rer_ranges[val] << row[13].value
-						heat_ranges[val] << row[14].value
-						flow_ranges[val] << row[15].value
-						feed1_ranges[val] << row[17].value
-						feed1acc_ranges[val] << row[18].value
-						drink1_ranges[val] << row[19].value
-						drink1acc_ranges[val] << row[20].value
-						xtot_ranges[val] << row[21].value
-						xamb_ranges[val] << row[22].value
-						ztot_ranges[val] << row[23].value
-						wheel_ranges[val] << row[24].value
-						wheelacc_ranges[val] << row[25].value
-						temp_ranges[val] << row[26].value
-						rhsamp_ranges[val] << row[27].value
-						rhpurge_ranges[val] << row[28].value
-						rhamb_ranges[val] << row[29].value
-						tempamb_ranges[val] << row[30].value
-						baropress_ranges[val] << row[31].value
-						enclosuretemp_ranges[val] << row[33].value
-						enclosuresetpoint_ranges[val] << row[34].value
+				    	vo2_ranges[val] << row[3].value.to_f if !row[3].nil?
+				    	o2in_ranges[val] << row[4].value.to_f if !row[4].nil?
+				    	o2out_ranges[val] << row[5].value.to_f if !row[5].nil?
+				    	do2_ranges[val] << row[6].value.to_f if !row[6].nil?
+				    	acco2_ranges[val] << row[7].value.to_f if !row[7].nil?
+				    	vco2_ranges[val] << row[8].value.to_f if !row[8].nil?
+				    	co2in_ranges[val] << row[9].value.to_f if !row[9].nil?
+				    	co2out_ranges[val] << row[10].value.to_f if !row[10].nil?
+				    	dco2_ranges[val] << row[11].value.to_f if !row[11].nil?
+				    	accco2_ranges[val] << row[12].value.to_f if !row[12].nil?
+				    	rer_ranges[val] << row[13].value.to_f if !row[13].nil?
+						heat_ranges[val] << row[14].value.to_f if !row[14].nil?
+						flow_ranges[val] << row[15].value.to_f if !row[15].nil?
+						feed1_ranges[val] << row[17].value.to_f if !row[17].nil?
+						feed1acc_ranges[val] << row[18].value.to_f if !row[18].nil?
+						drink1_ranges[val] << row[19].value.to_f if !row[19].nil?
+						drink1acc_ranges[val] << row[20].value.to_f if !row[20].nil?						
+						xtot_ranges[val] << row[21].value.to_f if !row[21].nil?
+						xamb_ranges[val] << row[22].value.to_f if !row[22].nil?
+						ztot_ranges[val] << row[23].value.to_f if !row[23].nil?
+						wheel_ranges[val] << row[24].value.to_f if !row[24].nil?
+						wheelacc_ranges[val] << row[25].value.to_f if !row[25].nil?
+						temp_ranges[val] << row[26].value.to_f if !row[26].nil?
+						rhsamp_ranges[val] << row[27].value.to_f if !row[27].nil?
+						rhpurge_ranges[val] << row[28].value.to_f if !row[28].nil?
+						rhamb_ranges[val] << row[29].value.to_f if !row[29].nil?
+						tempamb_ranges[val] << row[30].value.to_f if !row[30].nil?
+						baropress_ranges[val] << row[31].value.to_f if !row[31].nil?
+						enclosuretemp_ranges[val] << row[33].value.to_f if !row[33].nil?
+						enclosuresetpoint_ranges[val] << row[34].value.to_f if !row[34].nil?
 				    end
 				end
 				col_num += 1
 			end
+		elsif row.nil?
+			in_data_section = false
 		end
 		row_num += 1
 	end

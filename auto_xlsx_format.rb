@@ -1,3 +1,8 @@
+# https://dl.bintray.com/oneclick/rubyinstaller/rubyinstaller-1.9.3-p551.exe
+# gem install nokogiri -v 1.5.6
+# gem install rubyXL -v 3.3.22
+# ruby auto_xlsx_format.rb data.xlsx 8 "2015-02-24 7:00"
+
 require 'rubyXL'
 require 'time'
 
@@ -126,7 +131,7 @@ data_array = []
 		if !row.nil?
 			col_num = 0
 
-			if row[0].value == 1
+			if row[0].value.to_i == 1
 		    	in_data_section = true
 		    end
 
